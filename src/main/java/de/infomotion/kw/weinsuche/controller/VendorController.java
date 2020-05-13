@@ -53,11 +53,6 @@ public class VendorController {
 		vendor.setVendorFirstName(newVendor.getFirstName());
 		vendor.setVendorLastName(newVendor.getLastName());
 
-
-		System.out.println("erhaltenes Land: " + newVendor.getCountry());
-		System.out.println(country);
-		System.out.println(department);
-		System.out.println(vendor);
 		vendorRepository.save(vendor);
 
 	}
