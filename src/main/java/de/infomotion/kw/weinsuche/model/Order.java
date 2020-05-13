@@ -1,5 +1,7 @@
 package de.infomotion.kw.weinsuche.model;
 
+import de.infomotion.kw.weinsuche.dto.MostEarningWine;
+import de.infomotion.kw.weinsuche.dto.TopWineDto;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,7 +9,36 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
+@SqlResultSetMapping(
+		name = "MostEarningWine",
+		classes = @ConstructorResult(
+				targetClass = MostEarningWine.class,
+				columns = {
+						@ColumnResult(name = "year"),
+						@ColumnResult(name = "productName"),
+						@ColumnResult(name = "earnings")
+				}
+		)
+)
+
 @Entity
+@NamedNativeQuery(	name = "Order.retrieveTopWinePerYear",
+					query = "with umsatz_pro_jahr as (" +
+							" select trunc(a.datum,'YEAR') as jahr, p.produktbezeichnung, sum(a.gesamtverkaufspreis) as umsatz " +
+							"from auftrag a" +
+							"    left join produkt p" +
+							"    on a.produktnummer = p.produktnummer" +
+							"    group by trunc(a.datum,'YEAR'), p.produktbezeichnung" +
+							")" +
+							"    select u.jahr as year, " +
+							"			u.produktbezeichnung as productName, " +
+							"			u.umsatz as earnings" +
+							"      from umsatz_pro_jahr u " +
+							"inner join ( select jahr, max(umsatz) as umsatz from umsatz_pro_jahr group by jahr) m" +
+							"    	 on u.jahr = m.jahr and u.umsatz = m.umsatz" +
+							"    order by u.jahr",
+					resultSetMapping = "MostEarningWine")
+
 @Data
 @Table(name = "Auftrag")
 public class Order {

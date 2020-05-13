@@ -1,6 +1,5 @@
 package de.infomotion.kw.weinsuche.repositories;
 
-import de.infomotion.kw.weinsuche.dto.TopWeinDto;
 import de.infomotion.kw.weinsuche.dto.VendorDto;
 import de.infomotion.kw.weinsuche.model.Vendor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,5 +20,6 @@ public interface VendorRepository extends JpaRepository<Vendor, BigInteger> {
             "from Vendor v " +
             "left join v.department d " +
             "order by v.vendorLastName asc")
+
     List<VendorDto> retrieveVendorSortByLastName();
 }

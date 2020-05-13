@@ -21,6 +21,7 @@ public class ResultService {
 		//System.out.println("Französischer Wein: " + productRepository.findOneByOrigin("F"));
 		//System.out.println("Alle französischen Weine " + productRepository.searchWithCountry("Frankreich"));
 		System.out.println(productRepository.retrieveBySellingPrice());
+		System.out.println( );;
 	}
 
 

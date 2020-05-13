@@ -2,8 +2,9 @@ package de.infomotion.kw.weinsuche.dto;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 
-public class TopWeinDto {
+public class TopWineDto {
 
 	private String productName;
 	private String country;
@@ -11,7 +12,7 @@ public class TopWeinDto {
 	private BigDecimal sellingPrice;
 	private BigDecimal purchasePrice;
 
-	public TopWeinDto(String productName, String country, String vintage, BigDecimal sellingPrice, BigDecimal purchasePrice) {
+	public TopWineDto(String productName, String country, String vintage, BigDecimal sellingPrice, BigDecimal purchasePrice) {
 		this.productName = productName;
 		this.country = country;
 		this.vintage = vintage;

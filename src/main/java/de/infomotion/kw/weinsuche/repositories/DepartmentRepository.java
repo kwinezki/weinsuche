@@ -7,5 +7,5 @@ import java.math.BigInteger;
 
 public interface DepartmentRepository extends JpaRepository<Department, BigInteger> {
 
-
+    Department findByDepartmentName(String departmentName);
 }
