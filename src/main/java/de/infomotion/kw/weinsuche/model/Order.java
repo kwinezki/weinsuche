@@ -2,7 +2,9 @@ package de.infomotion.kw.weinsuche.model;
 
 import de.infomotion.kw.weinsuche.dto.MostEarningWine;
 import de.infomotion.kw.weinsuche.dto.TopWineDto;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -50,16 +52,18 @@ public class Order {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "datum", precision = 38, scale = 0, nullable = true)
 	private Date date;
-
+/*
 	@Column(name = "kundennummer", insertable = false, updatable = false, precision = 38, scale = 0, nullable = true)
 	private BigInteger customerNumber;
+
+
 
 	@Column(name = "produktnummer", insertable = false, updatable = false,precision = 38, scale = 0, nullable = true)
 	private BigInteger productNumber;
 
 	@Column(name = "verkaeufernummer", insertable = false, updatable = false, precision = 38, scale = 0, nullable = true)
 	private BigInteger vendorNumber;
-
+*/
 	@Column(name = "stueckzahl", precision = 38, scale = 0, nullable = true)
 	private BigInteger quantity;
 
@@ -71,14 +75,29 @@ public class Order {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "kundennummer")
+	@Getter(AccessLevel.NONE)
 	private Customer customer;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "verkaeufernummer")
+	@Getter(AccessLevel.NONE)
 	private Vendor vendor;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "produktnummer")
+	@Getter(AccessLevel.NONE)
 	private Product product;
+
+	public BigInteger getCustomerNumber() {
+		return customer.getCustomerNumber();
+	}
+
+	public BigInteger getVendorNumber() {
+		return vendor.getVendorNumber();
+	}
+
+	public BigInteger getProductNumber(){
+		return product.getProductNumber();
+	}
 
 }
