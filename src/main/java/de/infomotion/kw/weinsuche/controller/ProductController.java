@@ -28,7 +28,8 @@ public class ProductController {
 		return productRepository.retrieveByCountry(countryName);
 	}
 
-	@RequestMapping(value="/{country}")
+	@RequestMapping(value="/{country}") //Hier wird eine Darstellung von Land erwartet, bspw. 'Deutschland' oder 'Frankreich'
+										//in der nächsten Zeile wird diese Darstellung an die Variable übergeben und in die Funktion geleitet
 	public List<ProductDto> getProductsFromAngular(@PathVariable("country") String countryString) throws InterruptedException {
 		return productRepository.retrieveByCountry(countryString);
 	}
